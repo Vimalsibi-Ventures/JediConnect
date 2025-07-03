@@ -1,26 +1,25 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './OTPVerification.css';
-import { verifyOtp } from '../services/otp'; // ✅ Correct path
+import './OTPVerification.css'; // Reuse same style
+import { sendOtp } from '../services/otp';
 
-const OTPVerification: React.FC = () => {
-  const [otp, setOtp] = useState('');
+const SendEmail: React.FC = () => {
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleVerify = async (e: React.FormEvent) => {
+  const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
 
     try {
-      await verifyOtp(email, otp);
-      alert('✅ OTP verified successfully! Please login.');
-      navigate('/login'); // 🔄 Redirect to Login after OTP verification
+      await sendOtp(email);
+      alert('OTP sent successfully!');
+      navigate('/verify-otp'); // Navigate to OTP page
     } catch (err: any) {
-      setError(err?.response?.data?.message || 'Verification failed');
+      setError(err?.response?.data?.message || 'Failed to send OTP');
     } finally {
       setLoading(false);
     }
@@ -29,8 +28,8 @@ const OTPVerification: React.FC = () => {
   return (
     <div className="otp-page-background">
       <div className="otp-verification-container">
-        <h2>🔐 Verify Your Email</h2>
-        <form onSubmit={handleVerify} className="otp-form">
+        <h2>📧 Enter Email for OTP</h2>
+        <form onSubmit={handleSendOtp} className="otp-form">
           <label>Email Address</label>
           <input
             type="email"
@@ -40,19 +39,10 @@ const OTPVerification: React.FC = () => {
             required
           />
 
-          <label>OTP</label>
-          <input
-            type="text"
-            placeholder="Enter the OTP"
-            value={otp}
-            onChange={e => setOtp(e.target.value)}
-            required
-          />
-
           {error && <p className="error">{error}</p>}
 
           <button type="submit" disabled={loading}>
-            {loading ? 'Verifying...' : 'Verify OTP'}
+            {loading ? 'Sending...' : 'Send OTP'}
           </button>
         </form>
       </div>
@@ -60,4 +50,4 @@ const OTPVerification: React.FC = () => {
   );
 };
 
-export default OTPVerification;
+export default SendEmail;
