@@ -122,7 +122,7 @@ const LandingPage: React.FC = () => {
 
           {/* Feature 2 */}
           <div className="feature-row reverse">
-            <img src="/featimg2.jpeg" alt="Accept Missions" className="feature-image" />
+            <img src="/featimg3.jpg" alt="Accept Missions" className="feature-image" />
             <div className="feature-text">
               <h2>Accept and Complete Jedi Missions</h2>
               <p>Take on missions, track your progress, and complete objectives to earn recognition and rise in Jedi ranks.</p>
@@ -131,7 +131,7 @@ const LandingPage: React.FC = () => {
 
           {/* Feature 3 */}
           <div className="feature-row">
-            <img src="/featimg3.jpg" alt="Build Jedi Profile" className="feature-image" />
+            <img src="/featimg2.jpeg" alt="Build Jedi Profile" className="feature-image" />
             <div className="feature-text">
               <h2>Build Your Own Jedi Profile</h2>
               <p>Create your glowing Jedi profile, choose your saber color, Force alignment, and share your unique Jedi story.</p>
