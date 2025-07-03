@@ -42,7 +42,14 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    res.status(200).json({ message: 'Login successful', user: { name: user.name, email: user.email } });
+    res.status(200).json({
+      message: 'Login successful',
+      user: {
+        name: user.name,
+        email: user.email,
+        profileCompleted: user.profileCompleted ?? false, // ✅ Include this
+      },
+    });
   } catch (err: any) {
     res.status(500).json({ message: 'Login failed', error: err.message });
   }
