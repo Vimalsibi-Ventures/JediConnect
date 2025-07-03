@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './dashboard.css';
-import { FaUserCircle } from 'react-icons/fa';
 
 const Dashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'accept' | 'launch'>('accept');
@@ -54,7 +53,7 @@ const Dashboard: React.FC = () => {
         <div className="navbar-right">
           <div className="profile-container">
             <img
-              src="/default-avatar.png" // Replace with dynamic image from MongoDB later
+              src="/default-avatar.png"
               alt="Profile"
               className="profile-avatar"
               onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -85,17 +84,19 @@ const Dashboard: React.FC = () => {
         </div>
       </div>
 
-      {/* 🔸 Tab Content */}
+      {/* 🔸 Content */}
       <div className="dashboard-content">
         {activeTab === 'accept' && (
           <div className="mission-list">
             {dummyMatchedMissions.map((mission, idx) => (
-              <div className="mission-card" key={idx}>
-                <h3>{mission.title}</h3>
-                <p><strong>Recruiter:</strong> {mission.recruiter}</p>
-                <p><strong>Score:</strong> {mission.score}</p>
-                <p><em>{mission.explanation}</em></p>
-                <button className="accept-button">Accept Mission</button>
+              <div className="mission-wrapper" key={idx}>
+                <div className="mission-card">
+                  <h3>{mission.title}</h3>
+                  <p><strong>Recruiter:</strong> {mission.recruiter}</p>
+                  <p><strong>Score:</strong> {mission.score}</p>
+                  <p><em>{mission.explanation}</em></p>
+                  <button className="accept-button">Accept Mission</button>
+                </div>
               </div>
             ))}
           </div>
@@ -110,9 +111,11 @@ const Dashboard: React.FC = () => {
 
             <div className="mission-list">
               {dummyMyMissions.map((mission, idx) => (
-                <div className="mission-card" key={idx}>
-                  <h3>{mission.title}</h3>
-                  <p>{mission.description}</p>
+                <div className="mission-wrapper" key={idx}>
+                  <div className="mission-card">
+                    <h3>{mission.title}</h3>
+                    <p>{mission.description}</p>
+                  </div>
                 </div>
               ))}
             </div>
