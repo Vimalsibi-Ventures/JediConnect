@@ -15,7 +15,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('/loginbg.jpeg') center center / cover no-repeat;
+  background: url('/signin.jpeg') center center / cover no-repeat;
   opacity: 1;
   z-index: 0;
 }
@@ -126,6 +126,7 @@
 .auth-footer {
   margin-top: 1rem;
   font-size: 14px;
+  
 }
 
 .auth-footer a {
