@@ -8,8 +8,9 @@ const Dashboard: React.FC = () => {
   const navigate = useNavigate();
 
   const handleLogoClick = () => {
-    window.location.href = '/';
-  };
+  window.location.reload();
+};
+
 
   const handleLogout = () => {
     navigate('/');
