@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './dashboard.css';
 
 const Dashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'accept' | 'launch'>('accept');
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogoClick = () => {
     window.location.href = '/';
+  };
+
+  const handleLogout = () => {
+    navigate('/');
   };
 
   const dummyMatchedMissions = [
@@ -61,7 +67,7 @@ const Dashboard: React.FC = () => {
             {dropdownOpen && (
               <div className="profile-dropdown">
                 <a href="/profile">Profile Settings</a>
-                <a href="/logout">Logout</a>
+                <a onClick={handleLogout} style={{ cursor: 'pointer' }}>Logout</a>
               </div>
             )}
           </div>
