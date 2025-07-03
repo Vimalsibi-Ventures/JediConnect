@@ -258,10 +258,10 @@ body, html {
 /* Lightsaber Image Animation */
 .lightsaber-image {
   position: absolute;
-  top: 20%;
+  top: 10%;
   left: 0;
   height: auto;
-  width: 500px;
+  width: 700px;
   z-index: 10;
   transform: translateY(-50%) rotate(5deg);
   filter: drop-shadow(0 0 30px red) drop-shadow(0 0 60px red) drop-shadow(0 0 90px red);
