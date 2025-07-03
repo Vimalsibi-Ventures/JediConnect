@@ -10,6 +10,7 @@ import authRoutes from './routes/authRoutes';
 import otpRoutes from './routes/otpRoutes';
 import profileRoutes from './routes/profileRoutes';
 import avatarRoutes from './routes/avatarRoutes'; // ✅ NEW import
+import missionRoutes from './routes/missionRoutes';
 
 dotenv.config();
 connectDB();
@@ -26,6 +27,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/otp', otpRoutes);
 app.use('/api/profile', profileRoutes);
 app.use('/api/avatar', avatarRoutes); // ✅ mount avatar route
+app.use('/api/missions', missionRoutes);
 
 app.get('/', (_req, res) => {
   res.send('API is running...');
