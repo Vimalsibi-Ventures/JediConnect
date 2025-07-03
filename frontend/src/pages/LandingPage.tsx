@@ -1,9 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import './LandingPage.css';
 
 const LandingPage: React.FC = () => {
+  const [clickCount, setClickCount] = useState(0);
+  const [showLightsaber, setShowLightsaber] = useState(false);
+  const [crackText, setCrackText] = useState(false);
+
+  const handleLogoClick = () => {
+    const newCount = clickCount + 1;
+    setClickCount(newCount);
+
+    if (newCount === 3) {
+      setShowLightsaber(true);
+
+      setTimeout(() => {
+        setCrackText(true);
+      }, 1500); // Trigger text switch shortly after saber crosses
+
+      setTimeout(() => {
+        setShowLightsaber(false);
+      }, 2000); // Hide saber quickly after pass
+
+      setTimeout(() => {
+        setCrackText(false);
+        setClickCount(0);
+      }, 5000); // Full reset
+    }
+  };
+
   return (
     <div className="landing-container">
       {/* Background Layers */}
@@ -13,8 +39,8 @@ const LandingPage: React.FC = () => {
       <div className="lens-flare" />
 
       {/* Logo (Top Left Corner) */}
-      <div className="logo-top-left">
-        <img src="/LOGO.png" alt="JediConnect Logo" style={{ height: '50px' }} />
+      <div className="logo-top-left" onClick={handleLogoClick}>
+        <img src="/LOGO.png" alt="JediConnect Logo" style={{ height: '50px', cursor: 'pointer' }} />
       </div>
 
       {/* Auth Buttons (Top Right Corner) */}
@@ -31,14 +57,45 @@ const LandingPage: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <motion.h1
-            className="hero-title flicker"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-          >
-            JediConnect
-          </motion.h1>
+          {/* Animated Title with Smooth Transition */}
+          <AnimatePresence mode="wait" initial={false}>
+            {!crackText ? (
+              <motion.h1
+                key="jedi-title"
+                className="hero-title flicker"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                JediConnect
+              </motion.h1>
+            ) : (
+              <motion.h1
+                key="invadis-title"
+                className="hero-title cracked"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                INVADIS INC.
+              </motion.h1>
+            )}
+          </AnimatePresence>
+
+          {/* Lightsaber Animation */}
+          {showLightsaber && (
+            <motion.img
+              src="/redL.png"
+              alt="Lightsaber"
+              className="lightsaber-image"
+              initial={{ x: '-150%', opacity: 0.9 }}
+              animate={{ x: '250%', opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.5, ease: 'easeInOut' }}
+            />
+          )}
 
           <motion.p
             className="hero-subtitle"
