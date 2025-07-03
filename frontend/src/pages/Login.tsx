@@ -4,6 +4,13 @@ import './Login.css';
 const Login = () => {
   return (
     <div className="auth-background">
+      {/* Background Layers */}
+      <div className="login-bg" />
+      <div className="starry-bg" />
+      <div className="nebula-overlay" />
+      <div className="lens-flare" />
+
+      {/* Login Box */}
       <div className="auth-container">
         <h2 className="auth-title">Login to JediConnect</h2>
         <form className="auth-form">
