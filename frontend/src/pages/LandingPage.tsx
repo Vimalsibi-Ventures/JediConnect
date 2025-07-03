@@ -7,9 +7,16 @@ const LandingPage: React.FC = () => {
   return (
     <div className="landing-container">
       {/* Background Layers */}
+      {/* To insert your custom background, replace the image URL in LandingPage.css under .custom-bg */}
+      <div className="custom-bg" />
       <div className="starry-bg" />
       <div className="nebula-overlay" />
       <div className="lens-flare" />
+
+      {/* Logo (Top Left Corner) */}
+      <div className="logo-top-left">
+        <img src="/LOGO.png" alt="JediConnect Logo" style={{ height: '50px' }} />
+      </div>
 
       {/* Auth Buttons (Top Right Corner) */}
       <div className="auth-top-right">
@@ -41,20 +48,6 @@ const LandingPage: React.FC = () => {
         >
           A Galactic Recruitment & Mission Portal for Jedi Masters and Padawans
         </motion.p>
-      </motion.div>
-
-      {/* Mascot: LUMINIS */}
-      <motion.div
-        className="mascot-avatar"
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 1.2, duration: 0.8 }}
-      >
-        <img
-          src="/luminis.png"
-          alt="LUMINIS Mascot"
-          className="luminis-image"
-        />
       </motion.div>
     </div>
   );

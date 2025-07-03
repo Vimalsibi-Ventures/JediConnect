@@ -24,6 +24,16 @@ body, html {
   box-sizing: border-box;
 }
 
+/* Custom Background Layer */
+.custom-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url('/LandingPageBG.jpeg') center center / cover no-repeat;
+  opacity: 0.55; /* Adjust opacity as needed */
+  z-index: 0;
+}
+
 /* Background layers */
 .starry-bg {
   position: absolute;
@@ -54,12 +64,8 @@ body, html {
 }
 
 @keyframes floatNebula {
-  0%, 100% {
-    transform: scale(1) translateY(0);
-  }
-  50% {
-    transform: scale(1.1) translateY(-20px);
-  }
+  0%, 100% { transform: scale(1) translateY(0); }
+  50% { transform: scale(1.1) translateY(-20px); }
 }
 
 .lens-flare {
@@ -98,7 +104,6 @@ body, html {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Color Themes */
 .blue-btn {
   background-color: #4a90e2;
   color: #ffffff;
@@ -157,29 +162,10 @@ body, html {
   margin-bottom: 2rem;
 }
 
-/* Mascot Section */
-.mascot-avatar {
+/* Logo - Top Left */
+.logo-top-left {
   position: absolute;
-  bottom: 2rem;
-  right: 2rem;
-  width: 80px;
-  height: 80px;
-  z-index: 4;
-}
-
-.luminis-image {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  filter: drop-shadow(0 0 10px rgba(74, 144, 226, 0.5));
-  animation: hoverFloat 4s ease-in-out infinite;
-}
-
-@keyframes hoverFloat {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
+  top: 20px;
+  left: 30px;
+  z-index: 5;
 }
