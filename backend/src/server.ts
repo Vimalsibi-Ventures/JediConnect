@@ -1,24 +1,21 @@
 // src/server.ts
-import express, { Application } from 'express';
-import cors from 'cors';
+import express from 'express';
 import dotenv from 'dotenv';
+import connectDB from './config/db';
+import cors from 'cors';
 
-// Load environment variables from .env
 dotenv.config();
+connectDB();
 
-const app: Application = express();
-
-// Read PORT from environment, fallback to 5000 if not found
-const PORT = process.env.PORT || 5000;
-
+const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Example Route
-app.get('/', (req, res) => {
-  res.send('Welcome to JediConnect Backend 🚀');
+app.get('/', (_req, res) => {
+  res.send('API is running...');
 });
 
+const PORT = process.env.PORT || 5050;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
