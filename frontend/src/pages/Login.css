@@ -5,8 +5,8 @@
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* Shift to left */
-  padding-left: 5vw; /* Adjust distance from left edge */
+  justify-content: flex-start;
+  padding-left: 5vw;
   overflow: hidden;
 }
 
@@ -74,7 +74,7 @@
 /* Login Box */
 .login-container {
   position: relative;
-  opacity:75%;
+  opacity: 75%;
   z-index: 5;
   background-color: white;
   padding: 2rem 3rem;
@@ -83,11 +83,12 @@
   text-align: center;
   max-width: 400px;
   width: 90%;
+  color: #222; /* <- Make all text inside container dark */
 }
 
 .login-title {
   font-size: 24px;
-  color: #4a90e2;
+  color: #222; /* <- Darker heading text */
   margin-bottom: 1.5rem;
   font-family: 'Orbitron', sans-serif;
 }
@@ -104,6 +105,11 @@
   border: 1px solid #ccc;
   border-radius: 12px;
   outline: none;
+  color: #222; /* <- Dark input text */
+}
+
+.login-input::placeholder {
+  color: #555; /* <- Darker placeholder */
 }
 
 .login-input:focus {
@@ -129,13 +135,14 @@
 .login-footer {
   margin-top: 1rem;
   font-size: 14px;
-  
+  color: #222; /* Dark footer text */
 }
 
 .login-footer a {
-  color: #4a90e2;
+  color: #4a90e2; /* Only the link is blue */
   text-decoration: none;
 }
+
 
 .login-logo {
   position: fixed;
@@ -154,4 +161,11 @@
 .login-logo-img:hover {
   transform: scale(1.05);
 }
-
+.login-auth-buttons {
+  position: fixed;
+  top: 20px;
+  right: 30px;
+  display: flex;
+  gap: 1rem;
+  z-index: 10;
+}

@@ -90,11 +90,12 @@
   text-align: center;
   max-width: 400px;
   width: 90%;
+  color: #222; /* Darken all text inside container */
 }
 
 .signup-title {
   font-size: 24px;
-  color: #4a90e2;
+  color: #222; /* Dark heading */
   margin-bottom: 1.5rem;
   font-family: 'Orbitron', sans-serif;
 }
@@ -111,6 +112,11 @@
   border: 1px solid #ccc;
   border-radius: 12px;
   outline: none;
+  color: #222; /* Dark input text */
+}
+
+.signup-input::placeholder {
+  color: #555; /* Darker placeholder */
 }
 
 .signup-input:focus {
@@ -136,12 +142,14 @@
 .signup-footer {
   margin-top: 1rem;
   font-size: 14px;
+  color: #222; /* Dark footer text */
 }
 
 .signup-footer a {
-  color: #4a90e2;
+  color: #4a90e2; /* Only the link is blue */
   text-decoration: none;
 }
+
 
 .signup-logo {
   position: fixed;
