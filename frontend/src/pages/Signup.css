@@ -142,3 +142,21 @@
   color: #4a90e2;
   text-decoration: none;
 }
+
+.signup-logo {
+  position: fixed;
+  top: 20px;
+  left: 30px;
+  z-index: 10;
+}
+
+.signup-logo-img {
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.signup-logo-img:hover {
+  transform: scale(1.05);
+}

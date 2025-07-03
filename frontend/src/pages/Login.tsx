@@ -1,16 +1,25 @@
 import React from 'react';
 import './Login.css';
+import { Link } from 'react-router-dom';
+import logo from '/LOGO.png'; // <-- replace with actual path to your logo
 
 const Login = () => {
   return (
     <div className="login-background">
-      {/* Background Layers */}
+      {/* 🔹 Logo (Top-Left) */}
+      <div className="login-logo">
+        <Link to="/">
+          <img src={logo} alt="JediConnect" className="login-logo-img" />
+        </Link>
+      </div>
+
+      {/* 🔸 Background Layers */}
       <div className="login-bg" />
       <div className="login-starry-bg" />
       <div className="login-nebula-overlay" />
       <div className="login-lens-flare" />
 
-      {/* Login Box */}
+      {/* 🔸 Login Box */}
       <div className="login-container">
         <h2 className="login-title">Login to JediConnect</h2>
         <form className="login-form">
