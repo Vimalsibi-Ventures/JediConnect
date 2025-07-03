@@ -4,6 +4,7 @@ import './Signup.css';
 const Signup = () => {
   return (
     <div className="auth-background">
+      <div className="overlay" />
       <div className="auth-container">
         <h2 className="auth-title">Join the Jedi Order</h2>
         <form className="auth-form">
