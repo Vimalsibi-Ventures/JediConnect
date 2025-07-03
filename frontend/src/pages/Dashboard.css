@@ -1,79 +1,184 @@
-/* Background setup */
-.dashboard-background {
-  min-height: 100vh;
-  width: 100%;
-  background: url('/jedi-temple-bg.jpg') center center / cover no-repeat;
-  position: relative;
-  font-family: 'Orbitron', sans-serif;
+/* Root wrapper ensures dashboard styles stay isolated */
+.dashboard-wrapper {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom, #f0f4f8, #ffffff);
+  color: #222;
+}
+
+/* Navbar Styles */
+.dashboard-wrapper .navbar {
+  background-color: #ffffff;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dashboard-wrapper .navbar-left {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 2rem;
+}
+
+.dashboard-wrapper .navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #247fff;
+  cursor: pointer;
+}
+
+.dashboard-wrapper .logo-image {
+  height: 40px;
+  width: 40px;
+  object-fit: contain;
+}
+
+.dashboard-wrapper .logo-text {
+  color: #247fff;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.dashboard-wrapper .nav-link {
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.dashboard-wrapper .nav-link:hover {
+  color: #247fff;
+}
+
+.dashboard-wrapper .navbar-right {
+  font-size: 1.8rem;
+  color: #247fff;
+}
+
+/* Main Dashboard Container */
+.dashboard-wrapper .dashboard-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   padding: 2rem;
 }
 
-/* Jedi logo */
-.jedi-logo {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  height: 40px;
-  width: 40px;
-  z-index: 10;
-}
-
-/* Top-right buttons */
-.auth-buttons {
-  position: fixed;
-  top: 20px;
-  right: 20px;
+/* Header Section */
+.dashboard-wrapper .dashboard-header {
   display: flex;
-  gap: 1rem;
-  z-index: 10;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  margin-bottom: 2rem;
 }
 
-.btn {
-  padding: 10px 20px;
-  border-radius: 20px;
-  font-weight: bold;
-  text-decoration: none;
-  font-size: 14px;
-  transition: transform 0.2s ease;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+.dashboard-wrapper .brand-title {
+  font-size: 2rem;
+  color: #247fff;
+  font-weight: 700;
 }
 
-.btn:hover {
-  transform: scale(1.05);
+.dashboard-wrapper .bridge-title {
+  font-size: 1.2rem;
+  color: #333;
 }
 
-.login-btn {
-  background-color: #2d80f2;
+.dashboard-wrapper .user-icon {
+  font-size: 2rem;
+  color: #247fff;
+}
+
+/* Button */
+.dashboard-wrapper .new-mission-button {
+  background-color: #247fff;
   color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(36, 127, 255, 0.4);
+  margin-bottom: 1.5rem;
+  transition: background-color 0.3s ease;
 }
 
-.signup-btn {
-  background-color: #fdd600;
-  color: black;
+.dashboard-wrapper .new-mission-button:hover {
+  background-color: #1a6de0;
 }
 
-/* Centered card */
-.dashboard-card {
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(12px);
-  border-radius: 20px;
-  padding: 3rem 4rem;
-  text-align: center;
-  max-width: 700px;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+/* Main Content Grid */
+.dashboard-wrapper .dashboard-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
-.dashboard-title {
-  font-size: 3rem;
-  color: #3490ff;
-  text-shadow: 0 0 10px rgba(0, 102, 255, 0.5);
+.dashboard-wrapper .dashboard-grid {
+  display: flex;
+  gap: 2rem;
+  flex: 1;
+  height: 100%;
+}
+
+.dashboard-wrapper .transmissions,
+.dashboard-wrapper .droids {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.dashboard-wrapper .section-title {
+  font-size: 1.2rem;
   margin-bottom: 1rem;
+  color: #247fff;
+  font-weight: 600;
 }
 
-.dashboard-subtitle {
-  font-size: 1.25rem;
-  color: #222;
+.dashboard-wrapper .mission-card {
+  display: flex;
+  justify-content: space-between;
+  background: #f6f9fc;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  transition: box-shadow 0.3s ease;
+}
+
+.dashboard-wrapper .mission-card:hover {
+  box-shadow: 0 4px 10px rgba(36, 127, 255, 0.2);
+}
+
+.dashboard-wrapper .mission-title {
+  font-size: 1rem;
+  color: #247fff;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.dashboard-wrapper .mission-description {
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.dashboard-wrapper .mission-score {
+  font-weight: bold;
+  color: green;
+  font-size: 1.1rem;
+  align-self: center;
+}
+
+.dashboard-wrapper .droid-list {
+  padding-left: 1.2rem;
+  font-size: 1rem;
 }
