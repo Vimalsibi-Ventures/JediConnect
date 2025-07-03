@@ -32,6 +32,7 @@ app.use('/uploads', express.static('uploads'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
 app.get('/', (_req, res) => {
   res.send('API is running...');
 });

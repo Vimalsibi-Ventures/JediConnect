@@ -1,0 +1,82 @@
+/* src/pages/LaunchMission.css */
+
+.launch-container {
+  padding: 2rem;
+  max-width: 700px;
+  margin: 3rem auto;
+  background-color: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+  color: #e2e8f0;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.launch-container h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #38bdf8;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.launch-container textarea {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  resize: vertical;
+  margin-bottom: 1rem;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  background-color: #1e293b;
+  color: #f8fafc;
+  outline: none;
+}
+
+.launch-container textarea::placeholder {
+  color: #94a3b8;
+}
+
+.launch-container button {
+  background-color: #22d3ee;
+  color: #0f172a;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: block;
+  margin: 0 auto;
+}
+
+.launch-container button:hover {
+  background-color: #06b6d4;
+}
+
+.launch-container button:disabled {
+  background-color: #64748b;
+  cursor: not-allowed;
+}
+
+.launch-container .error {
+  color: #f87171;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.launch-container .response {
+  margin-top: 2rem;
+  border-top: 1px solid #334155;
+  padding-top: 1.5rem;
+}
+
+.launch-container .response h2 {
+  color: #38bdf8;
+  margin-bottom: 0.5rem;
+}
+
+.launch-container .response p {
+  color: #e2e8f0;
+  line-height: 1.6;
+}

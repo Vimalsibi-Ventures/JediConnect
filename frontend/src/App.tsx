@@ -7,7 +7,9 @@ import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import OTPVerification from './pages/OTPVerification';
-
+import ProfileCompletion from './pages/profileCompletion'; // Adjust if path differs
+import LaunchMission from './pages/LaunchMission';
+import AcceptedMissions from './pages/AcceptedMissions';
 
 const App: React.FC = () => {
   return (
@@ -19,6 +21,8 @@ const App: React.FC = () => {
         <Route path="/profile" element={<ProfileBuilder />} />
         <Route path="/verify-otp" element={<OTPVerification />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/launch" element={<LaunchMission />} />
+        <Route path="/missions" element={<AcceptedMissions />} />
       
     </Routes>
   );
