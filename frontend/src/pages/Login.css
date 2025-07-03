@@ -18,7 +18,7 @@
   width: 100%;
   height: 100%;
   background: url('/loginbg.jpeg') center center / cover no-repeat;
-  opacity: 1;
+  opacity: 0.75;
   z-index: 0;
 }
 
@@ -129,6 +129,7 @@
 .login-footer {
   margin-top: 1rem;
   font-size: 14px;
+  
 }
 
 .login-footer a {
