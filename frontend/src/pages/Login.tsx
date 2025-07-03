@@ -3,22 +3,22 @@ import './Login.css';
 
 const Login = () => {
   return (
-    <div className="auth-background">
+    <div className="login-background">
       {/* Background Layers */}
       <div className="login-bg" />
-      <div className="starry-bg" />
-      <div className="nebula-overlay" />
-      <div className="lens-flare" />
+      <div className="login-starry-bg" />
+      <div className="login-nebula-overlay" />
+      <div className="login-lens-flare" />
 
       {/* Login Box */}
-      <div className="auth-container">
-        <h2 className="auth-title">Login to JediConnect</h2>
-        <form className="auth-form">
-          <input type="email" placeholder="Email" className="auth-input" />
-          <input type="password" placeholder="Password" className="auth-input" />
-          <button type="submit" className="blue-button">Login</button>
+      <div className="login-container">
+        <h2 className="login-title">Login to JediConnect</h2>
+        <form className="login-form">
+          <input type="email" placeholder="Email" className="login-input" />
+          <input type="password" placeholder="Password" className="login-input" />
+          <button type="submit" className="login-button">Login</button>
         </form>
-        <p className="auth-footer">New here? <a href="/signup">Sign up</a></p>
+        <p className="login-footer">New here? <a href="/signup">Sign up</a></p>
       </div>
     </div>
   );
