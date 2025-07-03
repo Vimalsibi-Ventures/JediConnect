@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+.profile-builder-container {
+  font-family: 'Orbitron', sans-serif;
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(74, 144, 226, 0.2);
+  color: #1e2a40;
+  position: relative;
+  z-index: 1;
+}
+
+.profile-title {
+  text-align: center;
+  font-size: 2.2rem;
+  color: #4a90e2;
+  margin-bottom: 30px;
+  text-shadow: 0 0 8px rgba(74, 144, 226, 0.5);
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profile-form label {
+  font-weight: 600;
+  color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+}
+
+.profile-form input[type="text"],
+.profile-form input[type="file"],
+.profile-form textarea,
+.profile-form select {
+  margin-top: 6px;
+  padding: 10px 14px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 1px solid #c0d2f0;
+  background: rgba(255, 255, 255, 0.7);
+  outline: none;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-form input:focus,
+.profile-form textarea:focus,
+.profile-form select:focus {
+  border: 1px solid #4a90e2;
+  box-shadow: 0 0 10px rgba(74, 144, 226, 0.4);
+}
+
+.profile-form textarea {
+  resize: vertical;
+}
+
+.save-btn {
+  background: #4a90e2;
+  color: white;
+  font-weight: bold;
+  padding: 12px;
+  border-radius: 9999px;
+  border: none;
+  font-size: 1rem;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.save-btn:hover {
+  background: #327bd4;
+  box-shadow: 0 0 15px rgba(74, 144, 226, 0.6);
+}

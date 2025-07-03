@@ -6,6 +6,7 @@ import ProfileBuilder from './pages/ProfileBuilder';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import OTPVerification from './pages/OTPVerification';
 
 const App: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const App: React.FC = () => {
         <Route path="/" element={<LandingPage />} />
         <Route path="/missions" element={<MissionBoard />} />
         <Route path="/profile" element={<ProfileBuilder />} />
+        <Route path="/OTPVerification" element={<OTPVerification />} />
         <Route path="/dashboard" element={<Dashboard />} />
       
     </Routes>
