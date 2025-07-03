@@ -20,7 +20,7 @@ export const getProfile = async (req: Request, res: Response): Promise<void> => 
       bio: user.bio,
       location: user.location,
       avatar: user.avatar,
-      email: user.email // Read-only on frontend
+      email: user.email
     });
   } catch (err: any) {
     res.status(500).json({ message: 'Failed to fetch profile', error: err.message });
@@ -29,9 +29,15 @@ export const getProfile = async (req: Request, res: Response): Promise<void> => 
 
 // ✅ Update Profile
 export const updateProfile = async (req: Request, res: Response): Promise<void> => {
-  const { email, name, username, bio, location, avatar } = req.body;
-
   try {
+    console.log('Request Body:', req.body); // Debug log
+    const { email, name, username, bio, location, avatar } = req.body;
+
+    if (!email) {
+      res.status(400).json({ message: 'Email is required' });
+      return;
+    }
+
     const user = await User.findOne({ email });
 
     if (!user) {
@@ -49,6 +55,7 @@ export const updateProfile = async (req: Request, res: Response): Promise<void> 
 
     res.status(200).json({ message: 'Profile updated successfully', user });
   } catch (err: any) {
+    console.error('Profile update failed:', err);
     res.status(500).json({ message: 'Profile update failed', error: err.message });
   }
 };

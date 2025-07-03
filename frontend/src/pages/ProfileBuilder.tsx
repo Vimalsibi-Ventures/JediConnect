@@ -16,7 +16,6 @@ const ProfileBuilder: React.FC = () => {
   const [avatarPreview, setAvatarPreview] = useState('/default-avatar.png');
   const [loading, setLoading] = useState(false);
 
-  // ✅ Load profile
   const fetchProfile = async () => {
     try {
       const res = await axios.get(`http://localhost:5050/api/profile/get?email=${email}`);
@@ -31,22 +30,19 @@ const ProfileBuilder: React.FC = () => {
     fetchProfile();
   }, [email]);
 
-  // ✅ Text field changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // ✅ Avatar file change
   const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       setAvatarFile(file);
-      setAvatarPreview(URL.createObjectURL(file)); // Show instant preview
+      setAvatarPreview(URL.createObjectURL(file));
     }
   };
 
-  // ✅ Avatar upload
   const handleAvatarUpload = async () => {
     if (!avatarFile) return;
 
@@ -59,8 +55,8 @@ const ProfileBuilder: React.FC = () => {
       const res = await axios.post('http://localhost:5050/api/avatar/upload', formDataUpload, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
-      setFormData((prev) => ({ ...prev, avatar: res.data.avatarUrl })); // Update avatar URL in form data
-      setAvatarPreview(res.data.avatarUrl); // Update preview
+      setFormData((prev) => ({ ...prev, avatar: res.data.avatarUrl }));
+      setAvatarPreview(res.data.avatarUrl);
       alert('Avatar uploaded successfully!');
     } catch (err: any) {
       console.error('Avatar upload failed', err);
@@ -70,18 +66,14 @@ const ProfileBuilder: React.FC = () => {
     }
   };
 
-  // ✅ Submit profile updates (with avatarPreview update)
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       setLoading(true);
-      const res = await axios.put('http://localhost:5050/api/profile/update', { ...formData, email });
+      await axios.put('http://localhost:5050/api/profile/update', { ...formData, email }, {
+        headers: { 'Content-Type': 'application/json' }
+      });
       alert('Profile updated successfully!');
-
-      // ✅ Immediately update avatar preview from response
-      setAvatarPreview(res.data.user.avatar || '/default-avatar.png');
-
-      // ✅ Optional: Refresh full profile (safe way)
       await fetchProfile();
     } catch (err: any) {
       console.error('Profile update failed', err);
@@ -96,7 +88,6 @@ const ProfileBuilder: React.FC = () => {
       <div className="profile-builder-container">
         <h2>Profile Settings</h2>
 
-        {/* Avatar Section */}
         <div className="avatar-section">
           <img src={avatarPreview} alt="Avatar" className="avatar-preview" />
           <input type="file" accept="image/*" onChange={handleAvatarChange} />

@@ -19,7 +19,6 @@ export const uploadAvatar = async (req: Request, res: Response): Promise<void> =
       return;
     }
 
-    // Upload to Cloudinary using a stream
     const streamUpload = () => {
       return new Promise<{ secure_url: string }>((resolve, reject) => {
         const stream = cloudinary.uploader.upload_stream(
@@ -41,9 +40,10 @@ export const uploadAvatar = async (req: Request, res: Response): Promise<void> =
     res.status(200).json({
       message: 'Avatar uploaded successfully',
       avatarUrl: result.secure_url,
+      user // ✅ Include the user object for frontend
     });
   } catch (error: any) {
-    console.error(error);
+    console.error('Avatar Upload Error:', error);
     res.status(500).json({ message: 'Avatar upload failed', error: error.message });
   }
 };
