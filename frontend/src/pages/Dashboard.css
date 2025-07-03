@@ -18,7 +18,9 @@
   align-items: center;
   width: 95.6%;
   border-radius: 20px;
+  margin-bottom: 1.5rem; /* ✅ Push tabs away to reveal bottom curve */
 }
+
 
 .navbar-left {
   display: flex;
@@ -177,11 +179,15 @@
 .new-mission-box {
   background-color: #e8f0fe;
   padding: 2rem;
-  border-radius: 16px;
+  border-radius: 999px; /* ✅ Perfect pill-like curve */
   border: 2px dashed #247fff;
   text-align: center;
   width: 100%;
+  box-sizing: border-box;
+  max-width: 1000px; /* ✅ Optional: prevents it from stretching too wide */
+  margin: 0 auto; /* ✅ Center it horizontally */
 }
+
 
 .new-mission-box h3 {
   margin: 0;
