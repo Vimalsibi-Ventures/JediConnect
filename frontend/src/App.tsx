@@ -7,7 +7,6 @@ import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import OTPVerification from './pages/OTPVerification';
-import ProfileCompletion from './pages/profileCompletion'; // Adjust if path differs
 
 
 const App: React.FC = () => {
@@ -19,7 +18,6 @@ const App: React.FC = () => {
         <Route path="/missions" element={<MissionBoard />} />
         <Route path="/profile" element={<ProfileBuilder />} />
         <Route path="/verify-otp" element={<OTPVerification />} />
-        <Route path="/profile-builder" element={<ProfileCompletion />} />
         <Route path="/dashboard" element={<Dashboard />} />
       
     </Routes>

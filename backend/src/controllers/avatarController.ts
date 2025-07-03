@@ -1,19 +1,15 @@
 // src/controllers/avatarController.ts
 import { Request, Response } from 'express';
+import cloudinary from '../config/cloudinary';
 import User from '../models/User';
+import streamifier from 'streamifier';
 
 export const uploadAvatar = async (req: Request, res: Response): Promise<void> => {
   try {
     const { email } = req.body;
-    const avatarFile = req.file;
 
-    if (!email) {
-      res.status(400).json({ message: 'Email is required' });
-      return;
-    }
-
-    if (!avatarFile) {
-      res.status(400).json({ message: 'No avatar file uploaded' });
+    if (!req.file) {
+      res.status(400).json({ message: 'No file uploaded' });
       return;
     }
 
@@ -23,15 +19,31 @@ export const uploadAvatar = async (req: Request, res: Response): Promise<void> =
       return;
     }
 
-    const fileUrl = `/uploads/${avatarFile.filename}`;
-    user.avatar = fileUrl;
+    // Upload to Cloudinary using a stream
+    const streamUpload = () => {
+      return new Promise<{ secure_url: string }>((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream(
+          { folder: 'avatars' },
+          (error, result) => {
+            if (result) resolve(result as { secure_url: string });
+            else reject(error);
+          }
+        );
+        streamifier.createReadStream(req.file!.buffer).pipe(stream);
+      });
+    };
+
+    const result = await streamUpload();
+
+    user.avatar = result.secure_url;
     await user.save();
 
     res.status(200).json({
       message: 'Avatar uploaded successfully',
-      avatarUrl: fileUrl,
+      avatarUrl: result.secure_url,
     });
-  } catch (err: any) {
-    res.status(500).json({ message: 'Avatar upload failed', error: err.message });
+  } catch (error: any) {
+    console.error(error);
+    res.status(500).json({ message: 'Avatar upload failed', error: error.message });
   }
 };

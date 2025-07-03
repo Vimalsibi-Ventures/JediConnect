@@ -26,8 +26,11 @@ app.use('/uploads', express.static(path.join(__dirname, '../uploads'))); // ✅ 
 app.use('/api/auth', authRoutes);
 app.use('/api/otp', otpRoutes);
 app.use('/api/profile', profileRoutes);
-app.use('/api/avatar', avatarRoutes); // ✅ mount avatar route
 app.use('/api/missions', missionRoutes);
+app.use('/api/avatar', avatarRoutes);
+app.use('/uploads', express.static('uploads'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (_req, res) => {
   res.send('API is running...');
