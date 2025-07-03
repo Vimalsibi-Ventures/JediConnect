@@ -212,7 +212,7 @@ body, html {
 .feature-image {
   width: 100%;
   max-width: 600px;
-  height: auto;
+  height: 500px;
   aspect-ratio: 3 / 2;
   object-fit: cover;
   border-radius: 1rem;
