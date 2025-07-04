@@ -6,7 +6,7 @@ import './ProfileBuilder.css';
 
 const ProfileBuilder: React.FC = () => {
   const navigate = useNavigate();
-  const userId = localStorage.getItem('userId') || '';
+  const [userId, setUserId] = useState<string | null>(null); // ✅ Track userId with state
   const [formData, setFormData] = useState({
     name: '',
     username: '',
@@ -17,7 +17,19 @@ const ProfileBuilder: React.FC = () => {
   const [avatarPreview, setAvatarPreview] = useState('/default-avatar.png');
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    const storedUserId = localStorage.getItem('userId');
+    if (!storedUserId) {
+      alert('User ID not found. Please log in again.');
+      navigate('/login');
+      return;
+    }
+    setUserId(storedUserId);
+  }, [navigate]);
+
   const fetchProfile = async () => {
+    if (!userId) return;
+
     try {
       const res = await axios.get(`http://localhost:5050/api/profile/get/${userId}`);
       setFormData(res.data);
@@ -28,8 +40,9 @@ const ProfileBuilder: React.FC = () => {
   };
 
   useEffect(() => {
-    if (!userId) return;
-    fetchProfile();
+    if (userId) {
+      fetchProfile();
+    }
   }, [userId]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -44,7 +57,7 @@ const ProfileBuilder: React.FC = () => {
 
       const formDataUpload = new FormData();
       formDataUpload.append('avatar', file);
-      formDataUpload.append('userId', userId);
+      formDataUpload.append('userId', userId!);
 
       try {
         setLoading(true);
@@ -79,9 +92,12 @@ const ProfileBuilder: React.FC = () => {
     }
   };
 
+  if (!userId) {
+    return null; // 🔥 Prevents the page from rendering until userId is ready
+  }
+
   return (
     <div className="profile-builder-wrapper">
-      {/* 🔹 Dashboard Logo to navigate back */}
       <div className="profile-builder-logo" onClick={() => navigate('/dashboard')} style={{ cursor: 'pointer' }}>
         <img src="/LOGO.png" alt="JediConnect Logo" className="logo-image" />
         <span className="logo-text">JediConnect</span>

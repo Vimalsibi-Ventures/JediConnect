@@ -17,7 +17,7 @@ const App: React.FC = () => {
       <Route path="/signup" element={<Signup />} />
         <Route path="/" element={<LandingPage />} />
         <Route path="/missions" element={<MissionBoard />} />
-        <Route path="/profile" element={<ProfileBuilder />} />
+        <Route path="/profile-builder" element={<ProfileBuilder />} />
         <Route path="/verify-otp" element={<OTPVerification />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/launch" element={<LaunchMission />} />

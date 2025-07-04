@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './OTPVerification.css';
-import { verifyOtp } from '../services/otp'; // ✅ Correct path
+import axios from 'axios';
 
 const OTPVerification: React.FC = () => {
   const [otp, setOtp] = useState('');
@@ -17,10 +17,13 @@ const OTPVerification: React.FC = () => {
     setError('');
 
     try {
-      await verifyOtp(email, otp);
-      localStorage.setItem('email', email); // ✅ Store email for session
+      const response = await axios.post('http://localhost:5050/api/otp/verify', { email, otp });
+
+      localStorage.setItem('email', email);
+      localStorage.setItem('userId', response.data.userId); // ✅ Store userId properly
+
       alert('✅ OTP verified successfully! Please complete your profile.');
-      navigate('/profile'); // 🔄 Redirect to ProfileBuilder instead of Login
+      navigate('/profile-builder'); // ✅ Correct route
     } catch (err: any) {
       setError(err?.response?.data?.message || 'Verification failed');
     } finally {

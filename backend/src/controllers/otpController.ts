@@ -3,7 +3,7 @@
 import { Request, Response } from 'express';
 import Otp from '../models/Otp';
 import User from '../models/User';
-import sendEmail from '../utils/sendEmail'; // ✅ Use email utility
+import sendEmail from '../utils/sendEmail';
 
 export const sendOtp = async (req: Request, res: Response): Promise<void> => {
   const { email } = req.body;
@@ -15,9 +15,9 @@ export const sendOtp = async (req: Request, res: Response): Promise<void> => {
 
   try {
     const otpCode = Math.floor(100000 + Math.random() * 900000).toString();
-    const expiry = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes
+    const expiry = new Date(Date.now() + 5 * 60 * 1000);
 
-    await Otp.findOneAndDelete({ email }); // 🔄 clear any previous OTPs
+    await Otp.findOneAndDelete({ email });
     await Otp.create({ email, otp: otpCode, expiresAt: expiry });
 
     const emailHtml = `
@@ -35,7 +35,7 @@ export const sendOtp = async (req: Request, res: Response): Promise<void> => {
 
     res.status(200).json({ message: 'OTP sent to email' });
   } catch (err: any) {
-    console.error('OTP sending error:', err); // 🐛 Log server-side
+    console.error('OTP sending error:', err);
     res.status(500).json({ message: 'Failed to send OTP', error: err?.message || 'Unknown error' });
   }
 };
@@ -66,12 +66,16 @@ export const verifyOtp = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    await User.updateOne({ email }, { $set: { verified: true } });
+    const user = await User.findOneAndUpdate({ email }, { verified: true });
     await Otp.deleteOne({ email });
 
-    res.status(200).json({ message: 'OTP verified successfully', success: true });
+    res.status(200).json({
+      message: 'OTP verified successfully',
+      success: true,
+      userId: user?._id, // ✅ Return userId to frontend
+    });
   } catch (err: any) {
-    console.error('OTP verification error:', err); // 🐛 Server-side logging
+    console.error('OTP verification error:', err);
     res.status(500).json({ message: 'OTP verification failed', error: err?.message || 'Unknown error' });
   }
 };
