@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
 
 .otp-page-background {
-  background-image: url('/assets/jedi-light-bg.jpg'); /* Replace with your actual path */
+  background-image: url('/jedi-light-bg.jpeg'); /* Replace with your actual path */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   min-height: 100vh;
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
