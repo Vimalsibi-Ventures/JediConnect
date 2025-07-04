@@ -45,9 +45,10 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     res.status(200).json({
       message: 'Login successful',
       user: {
+        _id: user._id, // ✅ Send userId now
         name: user.name,
         email: user.email,
-        profileCompleted: user.profileCompleted ?? false, // ✅ Include this
+        profileCompleted: user.profileCompleted ?? false,
       },
     });
   } catch (err: any) {

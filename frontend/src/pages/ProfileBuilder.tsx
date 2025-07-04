@@ -1,10 +1,12 @@
 // src/pages/ProfileBuilder.tsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './ProfileBuilder.css';
 
 const ProfileBuilder: React.FC = () => {
-  const email = localStorage.getItem('email') || '';
+  const navigate = useNavigate();
+  const userId = localStorage.getItem('userId') || '';
   const [formData, setFormData] = useState({
     name: '',
     username: '',
@@ -12,13 +14,12 @@ const ProfileBuilder: React.FC = () => {
     location: '',
     avatar: '',
   });
-  const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [avatarPreview, setAvatarPreview] = useState('/default-avatar.png');
   const [loading, setLoading] = useState(false);
 
   const fetchProfile = async () => {
     try {
-      const res = await axios.get(`http://localhost:5050/api/profile/get?email=${email}`);
+      const res = await axios.get(`http://localhost:5050/api/profile/get/${userId}`);
       setFormData(res.data);
       setAvatarPreview(res.data.avatar || '/default-avatar.png');
     } catch (err: any) {
@@ -27,52 +28,47 @@ const ProfileBuilder: React.FC = () => {
   };
 
   useEffect(() => {
+    if (!userId) return;
     fetchProfile();
-  }, [email]);
+  }, [userId]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
-      setAvatarFile(file);
       setAvatarPreview(URL.createObjectURL(file));
-    }
-  };
 
-  const handleAvatarUpload = async () => {
-    if (!avatarFile) return;
+      const formDataUpload = new FormData();
+      formDataUpload.append('avatar', file);
+      formDataUpload.append('userId', userId);
 
-    const formDataUpload = new FormData();
-    formDataUpload.append('avatar', avatarFile);
-    formDataUpload.append('email', email);
-
-    try {
-      setLoading(true);
-      const res = await axios.post('http://localhost:5050/api/avatar/upload', formDataUpload, {
-        headers: { 'Content-Type': 'multipart/form-data' }
-      });
-      setFormData((prev) => ({ ...prev, avatar: res.data.avatarUrl }));
-      setAvatarPreview(res.data.avatarUrl);
-      alert('Avatar uploaded successfully!');
-    } catch (err: any) {
-      console.error('Avatar upload failed', err);
-      alert('Avatar upload failed');
-    } finally {
-      setLoading(false);
+      try {
+        setLoading(true);
+        const res = await axios.post('http://localhost:5050/api/avatar/upload', formDataUpload, {
+          headers: { 'Content-Type': 'multipart/form-data' }
+        });
+        setFormData((prev) => ({ ...prev, avatar: res.data.avatarUrl }));
+        setAvatarPreview(res.data.avatarUrl);
+        alert('Avatar uploaded successfully!');
+      } catch (err: any) {
+        console.error('Avatar upload failed', err);
+        alert('Avatar upload failed');
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     try {
       setLoading(true);
-      await axios.put('http://localhost:5050/api/profile/update', { ...formData, email }, {
-        headers: { 'Content-Type': 'application/json' }
-      });
+      await axios.put('http://localhost:5050/api/profile/update', { ...formData, userId });
       alert('Profile updated successfully!');
       await fetchProfile();
     } catch (err: any) {
@@ -85,26 +81,24 @@ const ProfileBuilder: React.FC = () => {
 
   return (
     <div className="profile-builder-wrapper">
+      {/* 🔹 Dashboard Logo to navigate back */}
+      <div className="profile-builder-logo" onClick={() => navigate('/dashboard')} style={{ cursor: 'pointer' }}>
+        <img src="/LOGO.png" alt="JediConnect Logo" className="logo-image" />
+        <span className="logo-text">JediConnect</span>
+      </div>
+
       <div className="profile-builder-container">
         <h2>Profile Settings</h2>
 
         <div className="avatar-section">
           <img src={avatarPreview} alt="Avatar" className="avatar-preview" />
           <input type="file" accept="image/*" onChange={handleAvatarChange} />
-          <button onClick={handleAvatarUpload} className="upload-button" disabled={loading}>
-            {loading ? 'Uploading...' : 'Upload Avatar'}
-          </button>
         </div>
 
         <form onSubmit={handleSubmit} className="profile-builder-form">
           <div className="form-group">
             <label>Full Name</label>
             <input type="text" name="name" value={formData.name} onChange={handleChange} required />
-          </div>
-
-          <div className="form-group">
-            <label>Email Address (Read Only)</label>
-            <input type="email" name="email" value={email} readOnly />
           </div>
 
           <div className="form-group">

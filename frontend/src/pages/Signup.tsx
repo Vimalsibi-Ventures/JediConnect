@@ -6,6 +6,7 @@ import axios from 'axios';
 import { sendOtp } from '../services/otp'; // Adjust path as needed
 
 const Signup = () => {
+  const [name, setName] = useState(''); // ✅ Add name state
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -20,7 +21,7 @@ const Signup = () => {
     try {
       // 1. Signup API
       const res = await axios.post('http://localhost:5050/api/auth/signup', {
-        name,
+        name, // ✅ Name is now provided
         email,
         password,
       });
@@ -59,6 +60,14 @@ const Signup = () => {
         <div className="signup-container">
           <h2 className="signup-title">Sign Up for JediConnect</h2>
           <form className="signup-form" onSubmit={handleSignup}>
+            <input
+              type="text"
+              placeholder="Full Name"
+              className="signup-input"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
             <input
               type="email"
               placeholder="Email"

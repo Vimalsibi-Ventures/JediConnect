@@ -1,6 +1,5 @@
 import multer from 'multer';
 
-// Memory storage for direct Cloudinary uploads
 const storage = multer.memoryStorage();
 
 const uploadCloudinary = multer({

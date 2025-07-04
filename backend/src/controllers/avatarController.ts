@@ -6,14 +6,14 @@ import streamifier from 'streamifier';
 
 export const uploadAvatar = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { email } = req.body;
+    const { userId } = req.body;
 
     if (!req.file) {
       res.status(400).json({ message: 'No file uploaded' });
       return;
     }
 
-    const user = await User.findOne({ email });
+    const user = await User.findById(userId);
     if (!user) {
       res.status(404).json({ message: 'User not found' });
       return;
@@ -40,7 +40,7 @@ export const uploadAvatar = async (req: Request, res: Response): Promise<void> =
     res.status(200).json({
       message: 'Avatar uploaded successfully',
       avatarUrl: result.secure_url,
-      user // ✅ Include the user object for frontend
+      user
     });
   } catch (error: any) {
     console.error('Avatar Upload Error:', error);

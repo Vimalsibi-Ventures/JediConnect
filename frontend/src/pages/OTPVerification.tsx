@@ -1,3 +1,4 @@
+// src/pages/OTPVerification.tsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './OTPVerification.css';
@@ -17,8 +18,9 @@ const OTPVerification: React.FC = () => {
 
     try {
       await verifyOtp(email, otp);
-      alert('✅ OTP verified successfully! Please login.');
-      navigate('/login'); // 🔄 Redirect to Login after OTP verification
+      localStorage.setItem('email', email); // ✅ Store email for session
+      alert('✅ OTP verified successfully! Please complete your profile.');
+      navigate('/profile'); // 🔄 Redirect to ProfileBuilder instead of Login
     } catch (err: any) {
       setError(err?.response?.data?.message || 'Verification failed');
     } finally {

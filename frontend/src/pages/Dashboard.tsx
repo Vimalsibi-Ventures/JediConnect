@@ -9,12 +9,17 @@ const Dashboard: React.FC = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [matchedMissions, setMatchedMissions] = useState<any[]>([]);
   const [myMissions, setMyMissions] = useState<any[]>([]);
+  const [avatarUrl, setAvatarUrl] = useState('/default-avatar.png');
 
   const navigate = useNavigate();
-  const userId = '68668fdd534fc4ead2781a3c'; // Replace dynamically when auth is ready
+  const userId = localStorage.getItem('userId') || '';
 
-  const handleLogoClick = () => window.location.reload();
-  const handleLogout = () => navigate('/');
+  const handleLogoClick = () => navigate('/dashboard');
+
+  const handleLogout = () => {
+    localStorage.clear(); // ✅ Clear localStorage on logout
+    navigate('/');
+  };
 
   const fetchMissions = async () => {
     try {
@@ -29,6 +34,15 @@ const Dashboard: React.FC = () => {
     }
   };
 
+  const fetchAvatar = async () => {
+    try {
+      const res = await axios.get(`http://localhost:5050/api/profile/get/${userId}`);
+      setAvatarUrl(res.data.avatar || '/default-avatar.png');
+    } catch (err) {
+      console.error('❌ Error fetching avatar:', err);
+    }
+  };
+
   const handleAcceptMission = async (missionId: string) => {
     try {
       const res = await axios.post('http://localhost:5050/api/missions/accept', {
@@ -36,22 +50,26 @@ const Dashboard: React.FC = () => {
         missionId,
       });
       console.log('✅ Mission accepted:', res.data);
-      fetchMissions(); // Refresh both lists after accepting
+      fetchMissions();
     } catch (err) {
       console.error('❌ Failed to accept mission:', err);
     }
   };
 
   useEffect(() => {
-    fetchMissions();
-  }, []);
+    if (!userId) {
+      navigate('/login'); // 🔒 Protect dashboard
+    } else {
+      fetchMissions();
+      fetchAvatar();
+    }
+  }, [userId]);
 
   return (
     <div className="dashboard-wrapper">
-      {/* Navbar */}
       <div className="navbar">
         <div className="navbar-left">
-          <div className="navbar-logo" onClick={handleLogoClick}>
+          <div className="navbar-logo" onClick={handleLogoClick} style={{ cursor: 'pointer' }}>
             <img src="/LOGO.png" alt="JediConnect Logo" className="logo-image" />
             <span className="logo-text">JediConnect</span>
           </div>
@@ -64,14 +82,15 @@ const Dashboard: React.FC = () => {
         <div className="navbar-right">
           <div className="profile-container">
             <img
-              src="/default-avatar.png"
+              src={avatarUrl}
               alt="Profile"
               className="profile-avatar"
               onClick={() => setDropdownOpen(!dropdownOpen)}
+              style={{ cursor: 'pointer' }}
             />
             {dropdownOpen && (
               <div className="profile-dropdown">
-                <a href="/profile">Profile Settings</a>
+                <a onClick={() => navigate('/profile')} style={{ cursor: 'pointer' }}>Profile Settings</a>
                 <a onClick={handleLogout} style={{ cursor: 'pointer' }}>Logout</a>
               </div>
             )}
@@ -79,7 +98,6 @@ const Dashboard: React.FC = () => {
         </div>
       </div>
 
-      {/* Tabs */}
       <div className="dashboard-tabs">
         <div
           className={`dashboard-tab ${activeTab === 'accept' ? 'active' : ''}`}
@@ -95,7 +113,6 @@ const Dashboard: React.FC = () => {
         </div>
       </div>
 
-      {/* Tab Content */}
       <div className="dashboard-content">
         {activeTab === 'accept' && (
           <div className="mission-list">

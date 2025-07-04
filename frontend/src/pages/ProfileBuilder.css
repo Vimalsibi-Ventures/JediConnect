@@ -3,7 +3,7 @@
   width: 100vw !important;
   min-height: 100vh !important;
   display: flex !important;
-  justify-content: center !important;
+  flex-direction: column !important; /* Stack logo and form vertically */
   align-items: center !important;
   padding: 40px 20px !important;
   background-color: #f0f4ff !important;
@@ -12,7 +12,28 @@
   max-width: 100% !important;
 }
 
-/* 🔸 Clean centered container */
+/* 🔹 Logo Section */
+.profile-builder-logo {
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  cursor: pointer !important;
+  padding: 20px !important;
+  box-sizing: border-box !important;
+}
+
+.profile-builder-logo img.logo-image {
+  width: 40px !important;
+  height: 40px !important;
+}
+
+.profile-builder-logo .logo-text {
+  font-size: 20px !important;
+  font-weight: bold !important;
+  color: #247fff !important;
+}
+
 .profile-builder-container {
   width: 100% !important;
   max-width: 800px !important;
@@ -40,16 +61,6 @@
   border-radius: 50% !important;
   object-fit: cover !important;
   border: 2px solid #247fff !important;
-}
-
-.upload-button {
-  margin-top: 15px !important;
-  padding: 10px 20px !important;
-  background-color: #e0e0e0 !important;
-  border: none !important;
-  border-radius: 8px !important;
-  cursor: not-allowed !important;
-  font-weight: bold !important;
 }
 
 .profile-builder-form .form-group {
@@ -92,5 +103,13 @@
 @media (max-width: 768px) {
   .profile-builder-container {
     padding: 20px !important;
+  }
+
+  .profile-builder-logo {
+    padding: 10px !important;
+  }
+
+  .profile-builder-logo .logo-text {
+    font-size: 16px !important;
   }
 }
