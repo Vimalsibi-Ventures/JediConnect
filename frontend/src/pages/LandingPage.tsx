@@ -121,13 +121,7 @@ const LandingPage: React.FC = () => {
           </div>
 
           {/* Feature 2 */}
-          <div className="feature-row reverse">
-            <img src="/featimg3.jpg" alt="Accept Missions" className="feature-image" />
-            <div className="feature-text">
-              <h2>Accept and Complete Jedi Missions</h2>
-              <p>Take on missions, track your progress, and complete objectives to earn recognition and rise in Jedi ranks.</p>
-            </div>
-          </div>
+          
 
           {/* Feature 3 */}
           <div className="feature-row">
@@ -139,20 +133,14 @@ const LandingPage: React.FC = () => {
           </div>
 
           {/* Feature 4 */}
-          <div className="feature-row reverse">
-            <img src="/featimg4.jpeg" alt="Manage Missions" className="feature-image" />
-            <div className="feature-text">
-              <h2>View and Manage Accepted Missions</h2>
-              <p>Track all your accepted missions in one place. Easily update progress or mark missions as complete.</p>
-            </div>
-          </div>
+          
 
           {/* Feature 5 */}
           <div className="feature-row">
             <img src="/featimg5.jpeg" alt="Track Progress" className="feature-image" />
             <div className="feature-text">
               <h2>Track Your Jedi Growth</h2>
-              <p>Visualize your journey from Padawan to Jedi Knight. Watch your growth as you complete missions and level up.</p>
+              <p>Visualize your journey from Padawan to Jedi Knight as story. Watch your growth as you complete missions and level up.</p>
             </div>
           </div>
         </section>
