@@ -1,23 +1,36 @@
 // src/components/LaunchMission.tsx
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './LaunchMission.css';
 
 const LaunchMission: React.FC = () => {
   const [prompt, setPrompt] = useState('');
   const [launchedMissions, setLaunchedMissions] = useState<any[]>([]);
   const [error, setError] = useState('');
-  const userId = '68668fdd534fc4ead2781a3c'; // Replace with dynamic ID if needed
+  const [loading, setLoading] = useState(false);
+
+  const userId = localStorage.getItem('userId') || '68668fdd534fc4ead2781a3c'; // fallback if not logged in
 
   const handleLaunch = async () => {
+    if (!prompt.trim()) {
+      setError('Mission prompt cannot be empty.');
+      return;
+    }
+
     try {
-      const res = await axios.post('http://localhost:5050/api/missions/launch', {
+      setLoading(true);
+      setError('');
+      await axios.post('http://localhost:5050/api/missions/launch', {
         userId,
         prompt,
       });
       setPrompt('');
-      fetchLaunchedMissions(); // Refresh after launch
+      fetchLaunchedMissions();
     } catch (err: any) {
       setError(err.response?.data?.message || 'Error launching mission');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -35,28 +48,34 @@ const LaunchMission: React.FC = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Launch a New Mission</h2>
+    <div className="launch-container">
+      <h1>🚀 Launch a New Mission</h1>
+
       <textarea
         placeholder="Enter your mission prompt..."
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
-        rows={4}
-        cols={50}
+        rows={5}
       />
-      <br />
-      <button onClick={handleLaunch}>Launch</button>
 
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <button onClick={handleLaunch} disabled={loading}>
+        {loading ? 'Launching...' : 'Launch'}
+      </button>
 
-      <h3>My Launched Missions</h3>
-      <ul>
-        {launchedMissions.map((mission) => (
-          <li key={mission._id}>
-            <strong>{mission.title}</strong>: {mission.description}
-          </li>
-        ))}
-      </ul>
+      {error && <div className="error">{error}</div>}
+
+      {launchedMissions.length > 0 && (
+        <div className="response">
+          <h2>🛰️ Your Launched Missions</h2>
+          {launchedMissions.map((mission) => (
+            <div key={mission._id} style={{ marginBottom: '1.2rem' }}>
+              <p>
+                <strong>{mission.title}</strong>: {mission.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

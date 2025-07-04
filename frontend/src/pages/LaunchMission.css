@@ -1,57 +1,75 @@
 /* src/pages/LaunchMission.css */
 
-.launch-container {
-  padding: 2rem;
-  max-width: 700px;
-  margin: 3rem auto;
-  background-color: #0f172a;
-  border: 1px solid #1e293b;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
-  color: #e2e8f0;
+/* 🔹 Background wrapper */
+body {
+  margin: 0;
+  padding: 0;
+  background: url('/jedi-light-bg.jpeg') no-repeat center center fixed;
+  background-size: cover;
   font-family: 'Courier New', Courier, monospace;
+  color: #e2e8f0;
 }
 
+/* 🔸 Launch box layout */
+.launch-container {
+  padding: 2rem;
+  max-width: 720px;
+  margin: 5rem auto;
+  background: rgba(15, 23, 42, 0.75); /* glassy dark navy */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 30px rgba(56, 189, 248, 0.2), 0 0 12px rgba(0, 255, 255, 0.1);
+  transition: transform 0.2s ease;
+}
+
+/* Heading */
 .launch-container h1 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
+  font-size: 2.2rem;
+  margin-bottom: 1.8rem;
   color: #38bdf8;
   text-align: center;
   letter-spacing: 1px;
+  text-shadow: 0 0 4px #0ea5e9;
 }
 
+/* Prompt textarea */
 .launch-container textarea {
   width: 100%;
-  padding: 1rem;
+  padding: 1.2rem;
   font-size: 1rem;
   resize: vertical;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   border: 1px solid #334155;
-  border-radius: 8px;
-  background-color: #1e293b;
+  border-radius: 10px;
+  background-color: rgba(30, 41, 59, 0.95);
   color: #f8fafc;
   outline: none;
+  transition: border 0.2s ease;
 }
 
 .launch-container textarea::placeholder {
   color: #94a3b8;
 }
 
+/* Submit button */
 .launch-container button {
   background-color: #22d3ee;
   color: #0f172a;
   padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.2s ease;
   display: block;
   margin: 0 auto;
+  font-weight: bold;
 }
 
 .launch-container button:hover {
   background-color: #06b6d4;
+  transform: translateY(-2px);
 }
 
 .launch-container button:disabled {
@@ -59,16 +77,20 @@
   cursor: not-allowed;
 }
 
+/* Error message */
 .launch-container .error {
   color: #f87171;
   margin-top: 1rem;
   text-align: center;
 }
 
+/* AI-generated response area */
 .launch-container .response {
   margin-top: 2rem;
   border-top: 1px solid #334155;
   padding-top: 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
 }
 
 .launch-container .response h2 {
@@ -79,4 +101,20 @@
 .launch-container .response p {
   color: #e2e8f0;
   line-height: 1.6;
+}
+
+/* Responsive love */
+@media (max-width: 768px) {
+  .launch-container {
+    margin: 2rem 1rem;
+    padding: 1.5rem;
+  }
+
+  .launch-container h1 {
+    font-size: 1.6rem;
+  }
+
+  .launch-container button {
+    width: 100%;
+  }
 }

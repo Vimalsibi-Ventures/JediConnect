@@ -73,7 +73,7 @@ const Dashboard: React.FC = () => {
             />
             {dropdownOpen && (
               <div className="profile-dropdown">
-                <a onClick={() => navigate('/profile')} style={{ cursor: 'pointer' }}>Profile Settings</a>
+                
                 <a onClick={handleLogout} style={{ cursor: 'pointer' }}>Logout</a>
               </div>
             )}
@@ -102,21 +102,7 @@ const Dashboard: React.FC = () => {
           <p>Use the Launch Mission page to create a prompt-based mission using AI parsing.</p>
         </div>
 
-        <div className="mission-list">
-          <h3>Your Previously Launched Missions</h3>
-          {myMissions.length === 0 ? (
-            <p>No launched missions yet.</p>
-          ) : (
-            myMissions.map((mission) => (
-              <div className="mission-wrapper" key={mission._id}>
-                <div className="mission-card">
-                  <h3>{mission.title}</h3>
-                  <p>{mission.description}</p>
-                </div>
-              </div>
-            ))
-          )}
-        </div>
+    
       </div>
     </div>
   );
