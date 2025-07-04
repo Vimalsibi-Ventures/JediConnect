@@ -81,7 +81,7 @@ const Dashboard: React.FC = () => {
         </div>
       </div>
 
-      {/* 📜 Jedi Story Section (outside tabs) */}
+      {/* 🧠 Jedi Story Section */}
       <div className="mission-story">
         <h2>🚀 The Jedi Mission Protocol</h2>
         <p>
@@ -91,9 +91,13 @@ const Dashboard: React.FC = () => {
         </p>
       </div>
 
-      {/* 🚀 Launch Section (only active content) */}
+      {/* 🚀 Launch Section */}
       <div className="launch-section">
-        <div className="new-mission-box" onClick={() => navigate('/launch')} style={{ cursor: 'pointer' }}>
+        <div
+          className="new-mission-box"
+          onClick={() => navigate('/launch')}
+          style={{ cursor: 'pointer' }}
+        >
           <h3>+ Launch New Mission</h3>
           <p>Use the Launch Mission page to create a prompt-based mission using AI parsing.</p>
         </div>
