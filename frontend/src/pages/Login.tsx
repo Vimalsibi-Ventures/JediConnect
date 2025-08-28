@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
-import logo from '/LOGO.png';
 import axios from 'axios';
 
 const Login = () => {
@@ -43,7 +42,7 @@ const Login = () => {
     <div className="login-background">
       <div className="login-logo">
         <Link to="/">
-          <img src={logo} alt="JediConnect" className="login-logo-img" />
+          <img src={"/LOGO.png"} alt="JediConnect" className="login-logo-img" />
         </Link>
       </div>
 
