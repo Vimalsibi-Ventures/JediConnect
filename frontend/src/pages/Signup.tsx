@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './Signup.css';
 import { Link, useNavigate } from 'react-router-dom';
-import logo from '/LOGO.png';
 import axios from 'axios';
 import { sendOtp } from '../services/otp'; // Adjust path as needed
 
@@ -46,7 +45,7 @@ const Signup = () => {
         {/* 🔹 Logo Top-Left */}
         <div className="signup-logo">
           <Link to="/">
-            <img src={logo} alt="JediConnect Logo" className="signup-logo-img" />
+            <img src={"/LOGO.png"} alt="JediConnect Logo" className="signup-logo-img" />
           </Link>
         </div>
 
