@@ -18,9 +18,8 @@
   align-items: center;
   width: 95.6%;
   border-radius: 20px;
-  margin-bottom: 1.5rem; /* ✅ Push tabs away to reveal bottom curve */
+  margin-bottom: 1.5rem;
 }
-
 
 .navbar-left {
   display: flex;
@@ -98,31 +97,27 @@
   background-color: #f0f0f0;
 }
 
-/* 🔸 Tabs */
-.dashboard-tabs {
-  display: flex;
-  justify-content: center;
-  background-color: #ffffff;
-  border-bottom: 1px solid #e0e0e0;
+/* 🧠 Story Section */
+.mission-story {
+  padding: 2rem;
+  background-color: #f9f9ff;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 2rem;
   width: 100%;
+  max-width: 1000px;
+  border-radius: 10px;
 }
 
-.dashboard-tab {
-  padding: 1rem 2rem;
-  cursor: pointer;
-  font-weight: 600;
+.mission-story h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.mission-story p {
+  font-size: 1rem;
   color: #555;
-  transition: all 0.3s ease;
-  border-bottom: 3px solid transparent;
-}
-
-.dashboard-tab:hover {
-  color: #247fff;
-}
-
-.dashboard-tab.active {
-  color: #247fff;
-  border-color: #247fff;
+  line-height: 1.6;
 }
 
 /* 🔸 Content Area */
@@ -148,7 +143,7 @@
   box-sizing: border-box;
 }
 
-/* Inner card - removed background & radius */
+/* Inner card */
 .mission-card {
   background: none;
   border-radius: 0;
@@ -174,20 +169,19 @@
   flex-direction: column;
   gap: 2rem;
   width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .new-mission-box {
   background-color: #e8f0fe;
   padding: 2rem;
-  border-radius: 999px; /* ✅ Perfect pill-like curve */
+  border-radius: 999px;
   border: 2px dashed #247fff;
   text-align: center;
   width: 100%;
   box-sizing: border-box;
-  max-width: 1000px; /* ✅ Optional: prevents it from stretching too wide */
-  margin: 0 auto; /* ✅ Center it horizontally */
 }
-
 
 .new-mission-box h3 {
   margin: 0;
@@ -217,18 +211,25 @@
   background-color: #1a6de0;
 }
 
-/* Responsive */
+/* 🔄 Responsive */
 @media (max-width: 768px) {
   .dashboard-content {
     padding: 1.5rem;
   }
 
-  .dashboard-tab {
-    padding: 0.75rem 1.2rem;
-    font-size: 0.95rem;
-  }
-
   .new-mission-box {
     padding: 1.5rem;
+  }
+
+  .mission-story {
+    padding: 1.5rem;
+  }
+
+  .mission-story h2 {
+    font-size: 1.3rem;
+  }
+
+  .mission-story p {
+    font-size: 0.95rem;
   }
 }
